@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Overview of all dishes</title>
+</head>
+<body>
+
+<h1>Overview of all dishes</h1>
+<p>
+    <a th:href="@{/dish/new}">Add a new dish</a>
+</p>
+<table>
+    <tr>
+        <th>Dish</th>
+        <th>Ingredients</th>
+        <th>Grams of Carbs</th>
+        <th>Times eaten</th>
+
+    </tr>
+    <tr th:each="dish : ${allDishes}">
+        <td th:text="${dish.name}"></td>
+        <td th:text="${dish.ingredient}"></td>
+        <td th:text="${dish.gramsOfCarbohydrates}"></td>
+        <td th:text="${dish.getNumberOfTimesEaten()}"></td>
+        <td><a th:href="@{meal/new/{dishId}(dishId = ${dish.dishId})}">Add this meal</a> </td>
+    </tr>
+</table>
+
+</body>
+</html>

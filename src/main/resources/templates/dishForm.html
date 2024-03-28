@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a new dish</title>
+</head>
+<body>
+
+<h1>Add a new dish</h1>
+<form th:action="@{/dish/new}" method="post" th:object="${dish}">
+    <table>
+        <tr>
+            <td><label for="nameField">Name</label></td>
+            <td><label for="ingredientField">Ingredients</label></td>
+            <td><label for="gramsOfCarbohydratesField">Grams of Carbs</label></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" id="nameField" th:field="*{name}" />
+            </td>
+            <td>
+                <input type="text" id="ingredientField" th:field="*{ingredient}" />
+            </td>
+            <td>
+                <input type="text" id="gramsOfCarbohydratesField" th:field="*{gramsOfCarbohydrates}" />
+            </td>
+        </tr>
+    </table>
+
+    <input type="submit" value="Save dish" />
+</form>
+</body>
+</html>
