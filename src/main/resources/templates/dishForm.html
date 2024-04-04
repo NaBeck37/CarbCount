@@ -11,15 +11,18 @@
     <table>
         <tr>
             <td><label for="nameField">Name</label></td>
-            <td><label for="ingredientField">Ingredients</label></td>
-            <td><label for="gramsOfCarbohydratesField">Grams of Carbs</label></td>
         </tr>
         <tr>
             <td>
                 <input type="text" id="nameField" th:field="*{name}" />
             </td>
             <td>
-                <input type="text" id="ingredientField" th:field="*{ingredient}" />
+                <select th:field="*{ingredients}" multiple>
+                    <option th:each="ingredient : ${allIngredients}"
+                            th:text="${ingredient.name}"
+                            th:value="${ingredient.ingredientId}">
+                    </option>
+                </select>
             </td>
             <td>
                 <input type="text" id="gramsOfCarbohydratesField" th:field="*{gramsOfCarbohydrates}" />

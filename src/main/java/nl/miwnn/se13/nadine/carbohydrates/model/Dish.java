@@ -1,11 +1,9 @@
 package nl.miwnn.se13.nadine.carbohydrates.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Nadine Beck
@@ -17,11 +15,13 @@ public class Dish {
     @Id @GeneratedValue
     private Long dishId;
     private String name;
-    private String ingredient;
     private int gramsOfCarbohydrates;
 
     @OneToMany(mappedBy = "dish")
     private List<Meal> meals;
+
+    @ManyToMany
+    private Set<Ingredient> ingredients;
 
     public int getNumberOfTimesEaten() {
         return meals.size();
@@ -43,19 +43,19 @@ public class Dish {
         this.name = name;
     }
 
-    public String getIngredient() {
-        return ingredient;
-    }
-
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
-    }
-
     public int getGramsOfCarbohydrates() {
         return gramsOfCarbohydrates;
     }
 
     public void setGramsOfCarbohydrates(int gramsOfCarbohydrates) {
         this.gramsOfCarbohydrates = gramsOfCarbohydrates;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
