@@ -14,7 +14,10 @@ import java.util.Set;
 public class Dish {
     @Id @GeneratedValue
     private Long dishId;
+
+    @Column(unique = true)
     private String name;
+
     private int gramsOfCarbohydrates;
 
     @OneToMany(mappedBy = "dish")

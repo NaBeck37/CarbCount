@@ -33,9 +33,9 @@ public class MealController {
         return "mealOverview";
     }
 
-    @GetMapping("/meal/new/{dishId}")
-    private String createNewMeal(@PathVariable("dishId") Long dishId) {
-        Optional<Dish> optionalDish = dishRepository.findById(dishId);
+    @GetMapping("/meal/new/{dishName}")
+    private String createNewMeal(@PathVariable("dishName") String dishName) {
+        Optional<Dish> optionalDish = dishRepository.findByName(dishName);
 
         if (optionalDish.isPresent()) {
             Meal meal = new Meal();

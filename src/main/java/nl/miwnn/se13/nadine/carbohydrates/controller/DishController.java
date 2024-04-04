@@ -8,7 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 /**
  * Nadine Beck
@@ -39,9 +42,27 @@ public class DishController {
 
     @PostMapping("/dish/new")
     private String saveDish(@ModelAttribute("dish") Dish dishToBeSaved, BindingResult result) {
+        if (dishToBeSaved.getDishId() == null
+                && dishRepository.findByName(dishToBeSaved.getName()).isPresent()) {
+            return "redirect:/dish/new";
+        }
+
         if (!result.hasErrors()) {
             dishRepository.save(dishToBeSaved);
         }
         return "redirect:/";
+    }
+
+    @GetMapping("/dish/edit/{name}")
+    private String showEditDishFrom(@PathVariable("name") String name, Model model) {
+        Optional<Dish> dish = dishRepository.findByName(name);
+
+        if(dish.isEmpty()) {
+            return "redirect:/";
+        }
+
+        model.addAttribute("dish", dish.get());
+        model.addAttribute("allIngredients", ingredientRepository.findAll());
+        return "dishForm";
     }
 }

@@ -23,7 +23,8 @@
         <td th:text="${dish.ingredients}"></td>
         <td th:text="${dish.gramsOfCarbohydrates}"></td>
         <td th:text="${dish.getNumberOfTimesEaten()}"></td>
-        <td><a th:href="@{meal/new/{dishId}(dishId = ${dish.dishId})}">Add this meal</a> </td>
+        <td><a th:href="@{meal/new/{dishName}(dishName = ${dish.name})}">Add this meal</a> </td>
+        <td><a th:href="@{dish/edit/{dishName}(dishName = ${dish.name})}">Edit this meal</a> </td>
     </tr>
 </table>
 
