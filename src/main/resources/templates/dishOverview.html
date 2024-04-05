@@ -1,32 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
+<head th:replace="~{fragments/general :: baseHeader(~{:: title})}">
     <meta charset="UTF-8">
     <title>Overview of all dishes</title>
 </head>
 <body>
 
-<h1>Overview of all dishes</h1>
-<p>
-    <a th:href="@{/dish/new}">Add a new dish</a>
-</p>
-<table>
-    <tr>
-        <th>Dish</th>
-        <th>Ingredients</th>
-        <th>Grams of Carbs</th>
-        <th>Times eaten</th>
+<div th:replace="~{fragments/general :: navbar}"></div>
 
-    </tr>
-    <tr th:each="dish : ${allDishes}">
-        <td th:text="${dish.name}"></td>
-        <td th:text="${dish.ingredients}"></td>
-        <td th:text="${dish.gramsOfCarbohydrates}"></td>
-        <td th:text="${dish.getNumberOfTimesEaten()}"></td>
-        <td><a th:href="@{meal/new/{dishName}(dishName = ${dish.name})}">Add this meal</a> </td>
-        <td><a th:href="@{dish/edit/{dishName}(dishName = ${dish.name})}">Edit this meal</a> </td>
-    </tr>
-</table>
+<div class="container">
+    <h1>Overview of all dishes</h1>
+    <p>
+        <a th:href="@{/dish/new}">Add a new dish</a>
+    </p>
+    <table>
+        <tr>
+            <th>Dish</th>
+            <th>Ingredients</th>
+            <th>Grams of Carbs</th>
+            <th>Times eaten</th>
+
+        </tr>
+        <tr th:each="dish : ${allDishes}">
+            <td th:text="${dish.name}"></td>
+            <td th:text="${dish.ingredients}"></td>
+            <td th:text="${dish.gramsOfCarbohydrates}"></td>
+            <td th:text="${dish.getNumberOfTimesEaten()}"></td>
+            <td><a th:href="@{meal/new/{dishName}(dishName = ${dish.name})}">Add this meal</a> </td>
+            <td><a th:href="@{dish/edit/{dishName}(dishName = ${dish.name})}">Edit this meal</a> </td>
+        </tr>
+    </table>
+</div>
+
+<div th:replace="~{fragments/general :: footer}"></div>
+<div th:replace="~{fragments/general :: bottomScripts}"></div>
 
 </body>
 </html>

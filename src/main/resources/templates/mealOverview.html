@@ -1,29 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
+<head th:replace="~{fragments/general :: baseHeader(~{:: title})}">
     <meta charset="UTF-8">
     <title>Overview of all dishes</title>
 </head>
 <body>
 
-<h1>CarbCount</h1>
+<div th:replace="~{fragments/general :: navbar}"></div>
+
+<div class="container">
+    <h1>CarbCount</h1>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Meal</th>
+            <th>Grams of Carbs</th>
+
+        </tr>
+        <tr th:each="meal : ${allMeals}">
+            <td th:text="${meal.getDayOfEating()}"></td>
+            <td th:text="${meal.getDish().name}"></td>
+            <td th:text="${meal.dish.gramsOfCarbohydrates}"></td>
+        </tr>
+    </table>
+</div>
+
 <p>
     <a th:href="@{/dish/new}">Add a new dish</a>
     <a th:href="@{/dish}">All dishes</a>
 </p>
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Meal</th>
-        <th>Grams of Carbs</th>
 
-    </tr>
-    <tr th:each="meal : ${allMeals}">
-        <td th:text="${meal.getDayOfEating()}"></td>
-        <td th:text="${meal.getDish().name}"></td>
-        <td th:text="${meal.dish.gramsOfCarbohydrates}"></td>
-    </tr>
-</table>
+<div th:replace="~{fragments/general :: footer}"></div>
+<div th:replace="~{fragments/general :: bottomScripts}"></div>
 
 </body>
 </html>

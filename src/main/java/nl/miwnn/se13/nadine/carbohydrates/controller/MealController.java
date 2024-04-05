@@ -27,7 +27,7 @@ public class MealController {
         this.mealRepository = mealRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping({"/","/meal"})
     private String showMealOverview(Model model) {
         model.addAttribute("allMeals", mealRepository.findAll());
         return "mealOverview";
