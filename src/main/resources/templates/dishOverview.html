@@ -22,7 +22,7 @@
 
         </tr>
         <tr th:each="dish : ${allDishes}">
-            <td th:text="${dish.name}"></td>
+            <td><a th:href="@{/dish/{dishName}(dishName = ${dish.name})}" th:text="${dish.name}"></a></td>
             <td th:text="${dish.ingredients}"></td>
             <td th:text="${dish.gramsOfCarbohydrates}"></td>
             <td th:text="${dish.getNumberOfTimesEaten()}"></td>

@@ -53,7 +53,7 @@ public class DishController {
         return "redirect:/";
     }
 
-    @GetMapping("/dish/edit/{name}")
+    @GetMapping("/dish/{name}/edit")
     private String showEditDishFrom(@PathVariable("name") String name, Model model) {
         Optional<Dish> dish = dishRepository.findByName(name);
 
@@ -65,4 +65,17 @@ public class DishController {
         model.addAttribute("allIngredients", ingredientRepository.findAll());
         return "dishForm";
     }
+
+    @GetMapping("/dish/{name}")
+    private String showDishdetails(@PathVariable("name") String name, Model model) {
+        Optional<Dish> dish = dishRepository.findByName(name);
+
+        if(dish.isEmpty()) {
+            return "redirect:/dish";
+        }
+
+        model.addAttribute("dishToBeShown", dish.get());
+        return "dishDetail";
+    }
+
 }
